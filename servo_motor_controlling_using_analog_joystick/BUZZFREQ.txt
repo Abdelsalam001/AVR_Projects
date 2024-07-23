@@ -1,0 +1,21 @@
+#include "LSTD_types.h"
+#include "LBIT_math.h"
+
+#include "MDIO_interface.h"
+#include "MADC_interface.h"
+#include "MTIM_interface.h"
+
+int main(void)
+{
+	u8 L_u8ADCValue = 0;
+	MDIO_voidSetPinDirection(MDIO_PORTB, 3, MDIO_OUTPUT);
+	MADC_voidInit(MADC_VREF_AVCC, MADC_PRESCALER_8, MADC_RESOLUTION_8BITS);
+	MTIM_voidInit(MTIM_TIMER0, MTIM_MODE_CTC, MTIM_CS_PRESCALER_8, MTIM_HWPIN_TOGGLE);
+	MTIM_voidStartTimer(MTIM_TIMER0);
+	while(1)
+	{
+		L_u8ADCValue = MADC_u8ReadADC(MADC_CHANNEL_ADC0);
+		MTIM_voidSetOCR(MTIM_TIMER0, L_u8ADCValue);
+	}
+	return 0;
+}
