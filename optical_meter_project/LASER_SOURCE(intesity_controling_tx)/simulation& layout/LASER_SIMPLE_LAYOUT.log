@@ -1,0 +1,13 @@
+# Writing all output to: C:\Users\New_Amr\OneDrive\Desktop\CodeX\pr\LASER\LASER_SIMPLE_LAYOUT.log
+Warning - No placement data found !
+set pad_wire_necking on
+bus diagonal
+fanout 5
+route 50
+clean 2
+route 50 16
+clean 2
+filter 5
+recorner diagonal
+status_file
+
